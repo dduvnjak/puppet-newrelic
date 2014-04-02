@@ -74,12 +74,13 @@ class newrelic (
     owner   => 'root',
     group   => 'newrelic',
     notify  => Service['newrelic-sysmond'],
-    content  => template('newrelic/nrsysmond.cfg.erb')
+    content  => template('newrelic/nrsysmond.cfg.erb'),
+    require => Package['newrelic-sysmond']
   }
 
   service { 'newrelic-sysmond':
     ensure  => running,
     enable  => true,
-    require => [ Package['newrelic-sysmond'], File['/etc/newrelic/nrsysmond.cfg'] ]
+    require => File['/etc/newrelic/nrsysmond.cfg']
   }
 }
