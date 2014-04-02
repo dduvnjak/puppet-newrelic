@@ -59,6 +59,14 @@ class newrelic (
       }
     }
 
+    'RedHat', 'Amazon': {
+      package { 'newrelic_repo':
+        ensure      => installed,
+        provider    => rpm,
+        source      => 'http://download.newrelic.com/pub/newrelic/el5/i386/newrelic-repo-5-3.noarch.rpm'
+       }
+    }
+
     default: {
       fail("The newrelic module does not support ${::osfamily}.")
     }
